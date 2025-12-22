@@ -21,8 +21,8 @@ export function addAmountByCategory(transactions, dateMap) {
   return dateMap
 }
 
-export async function main() {
-  const ynabTransactions = await ynabApiFunctions.getAndTransformTransactions(ynabAPI, import.meta.env.VITE_BUDGET_2025_ID, import.meta.env.VITE_CHECKING_ID, YNAB_START_DATE)
+export async function main(startDate, endDate) {
+  const ynabTransactions = await ynabApiFunctions.getAndTransformTransactions(ynabAPI, import.meta.env.VITE_BUDGET_2025_ID, import.meta.env.VITE_CHECKING_ID, startDate, endDate)
   const dates = new Set([...ynabTransactions.map(t => t.date)])
   const dateMap = new Map([...Array.from(dates)].map(d => [d, {}]))
   return addAmountByCategory(ynabTransactions, dateMap)

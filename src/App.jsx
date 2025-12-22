@@ -30,46 +30,109 @@ function DailyChart({ day, dailyTransactions }) {
     </div>
   )
 }
-function App() {
+
+function SelectAndDisplay({ range, setRange }) {
   const [dailySpendingMap, setDailySpendingMap] = useState(null)
   const [dates, setDates] = useState([])
   const [day, setDay] = useState()
   const [dailyTransactions, setDailyTransactions] = useState(null)
+  const { start, end } = range
+  function getDailyTotal(dailyTransaction) {
+    const [date, values] = Array.from(dailyTransaction)
+    const total = Object.values(values).reduce((acc, current) => acc += current, 0)
+    return `${date} - ${total}`
+  }
   useEffect(() => {
-    getDailySpending()
+    getDailySpending(range.start, range.end)
       .then(res => {
         setDailySpendingMap(res)
-        const datesArray = Array.from(res.keys()).sort((a, b) => a < b)
-        const datesSet = new Set([...datesArray])
-        setDates(Array.from(datesSet))
+        const datesWithTotals = Array.from(res.entries()).map(i => getDailyTotal(i))
+        setDates(datesWithTotals)
       })
       .catch(e => {
         console.log(`Error: ${e.message}`)
       })
-  }, [day, dailyTransactions])
-  if (!dailySpendingMap || dates.length === 0) {
-    return <div>Nothing to display</div>
-  }
+  }, [])
   function handleDaySelection(event) {
     event.preventDefault()
     setDay(event.target.value)
     setDailyTransactions(dailySpendingMap.get(event.target.value))
   }
+
+  if (!dailySpendingMap || dates.length === 0) {
+    return <div>Nothing to display</div>
+  }
+
+  return (
+    <div>
+      <p>You have selected to see the date range between {start} and {end} to see which days :.</p>
+      <p>Select which day you would like to see:</p>
+      <div>
+        <select
+          onChange={handleDaySelection}
+        >
+          <option>no date selected</option>
+          {dates.map(d =>
+            <option key={d}> {d}</option>
+          )}
+        </select >
+        <button onClick={() => setRange({ start: '', end: '' })} >clear</button>
+      </div>
+      {
+        day && dailyTransactions ? <DailyChart
+          day={day}
+          dailyTransactions={dailyTransactions}
+        /> : null
+      }
+    </div >
+  )
+}
+
+function SelectRange({ setRange }) {
+  const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
+  function handleSubmit(event) {
+    event.preventDefault()
+    setRange({ start: start, end: end })
+  }
+  return (
+    <div>
+      <p>Select the start and end date of the range:</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Start </label>
+          <input
+            type='date'
+            onChange={({ target }) => setStart(target.value)}
+          />
+        </div>
+        <div>
+          <label>End </label>
+          <input
+            type="date"
+            onChange={({ target }) => setEnd(target.value)}
+          />
+        </div>
+        <button>select</button>
+      </form>
+    </div>
+  )
+}
+function App() {
+  const [range, setRange] = useState({
+    start: '',
+    end: ''
+  })
+
   return (
     <>
-      <p>See which day ::</p>
-      <select
-        onChange={handleDaySelection}
-      >
-        <option>no date selected</option>
-        {dates.map(d =>
-          <option key={d}> {d}</option>
-        )}
-      </select >
-      {day && dailyTransactions ? <DailyChart
-        day={day}
-        dailyTransactions={dailyTransactions}
-      /> : null}
+      {range.start.length === 0 && range.end.length === 0 ?
+        <SelectRange setRange={setRange} /> :
+        <SelectAndDisplay
+          range={range}
+          setRange={setRange}
+        />
+      }
     </>
   )
 }

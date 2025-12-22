@@ -44,10 +44,8 @@ function cleanCategory(category) {
 }
 
 function simplifyTransactions(transactions) {
-  console.log(transactions.map(t => t.category_name))
   return transactions.map(t => {
     const { id, date, amount, account_name, payee_name, category_name } = t
-    console.log('category_name', category_name)
     const amountConverted = ynab.utils.convertMilliUnitsToCurrencyAmount(amount, 2)
     return {
       id,
@@ -74,14 +72,14 @@ async function getTransactionsByAccount(api, budgetId, accountId) {
   }
 }
 
-export function filterTransactionsByStartDate(transactions, startDate) {
-  return transactions.filter(t => t.date >= startDate)
+export function filterTransactionsByRange(transactions, startDate, endDate) {
+  return transactions.filter(t => t.date >= startDate && t.date <= endDate)
 }
 
-async function getAndTransformTransactions(api, budgetId, accountId, startDate) {
+async function getAndTransformTransactions(api, budgetId, accountId, startDate, endDate) {
   try {
     const transactions = await getTransactionsByAccount(api, budgetId, accountId)
-    const filteredTransactions = filterTransactionsByStartDate(transactions, startDate)
+    const filteredTransactions = filterTransactionsByRange(transactions, startDate, endDate)
     return simplifyTransactions(filteredTransactions)
   } catch (e) {
     throw new Error(e)
