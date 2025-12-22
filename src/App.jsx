@@ -40,7 +40,7 @@ function SelectAndDisplay({ range, setRange }) {
   function getDailyTotal(dailyTransaction) {
     const [date, values] = Array.from(dailyTransaction)
     const total = Object.values(values).reduce((acc, current) => acc += current, 0)
-    return `${date} - ${total}`
+    return `${date} - ${total.toFixed(2)}`
   }
   useEffect(() => {
     getDailySpending(range.start, range.end)
@@ -55,8 +55,13 @@ function SelectAndDisplay({ range, setRange }) {
   }, [])
   function handleDaySelection(event) {
     event.preventDefault()
-    setDay(event.target.value)
-    setDailyTransactions(dailySpendingMap.get(event.target.value))
+    const arr = event.target.value.split("-").map(i => i.trim())
+    const year = arr[0]
+    const month = arr[1]
+    const day = arr[2]
+    const date = `${year}-${month}-${day}`
+    setDay(date)
+    setDailyTransactions(dailySpendingMap.get(date))
   }
 
   if (!dailySpendingMap || dates.length === 0) {
