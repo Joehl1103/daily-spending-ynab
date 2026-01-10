@@ -70,7 +70,7 @@ function SelectAndDisplay({ range, setRange }) {
 
   return (
     <div>
-      <p>You have selected to see the date range between {start} and {end} to see which days :.</p>
+      <p>You have selected to see the date range between {start} and {end}:</p>
       <p>Select which day you would like to see:</p>
       <div>
         <select

@@ -1,16 +1,92 @@
-# React + Vite
+# Daily Spending Report App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React web application that integrates with YNAB (You Need A Budget) to visualize daily spending patterns by category.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Connect to your YNAB account via API
+- Select custom date ranges for analysis
+- View daily spending totals
+- Interactive bar charts showing spending breakdown by category
+- Clean, responsive Material-UI interface
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI framework
+- **Vite** - Build tool and development server
+- **Material-UI (MUI)** - Component library and charts
+- **YNAB SDK** - API integration for budget data
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18+)
+- A YNAB account with API access
+- YNAB Personal Access Token ([get one here](https://app.ynab.com/settings/developer))
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd daily-spending-report-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the project root with your YNAB credentials:
+   ```
+   VITE_ACCESS_TOKEN=your_ynab_api_token
+   VITE_BUDGET_2025_ID=your_budget_uuid
+   VITE_CHECKING_ID=your_account_uuid
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser to `http://localhost:5173`
+
+## Usage
+
+1. Select a start and end date for the period you want to analyze
+2. Choose a specific day from the dropdown to see detailed spending
+3. View the bar chart breakdown of spending by category
+
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+
+## Project Structure
+
+```
+src/
+├── main.jsx          # App entry point
+├── App.jsx           # Main component with UI logic
+└── modules/
+    └── ynab/
+        ├── index.js      # Data processing logic
+        ├── ynabApi.js    # YNAB API functions
+        └── index.test.js # Unit tests
+```
+
+## Testing
+
+Run unit tests with:
+```bash
+node --test src/modules/ynab/index.test.js
+```
+
+## License
+
+MIT
