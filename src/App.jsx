@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { main as getDailySpending } from './modules/ynab/index.js';
+import { useState, useEffect } from 'react'
+import { main as getDailySpending } from './modules/ynab/index.js'
 import { BarChart } from '@mui/x-charts/BarChart'
+import HomeIcon from '@mui/icons-material/Home'
 
 function DailyChart({ day, dailyTransactions }) {
   console.log(Object.keys(dailyTransactions))
@@ -31,12 +32,31 @@ function DailyChart({ day, dailyTransactions }) {
   )
 }
 
-function SelectAndDisplay({ range, setRange }) {
+function HomeButton({setIsHome}){
+  return (
+  <div>
+      <button 
+        style={{
+          padding: 5,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1
+        }}
+        onClick={() => setIsHome(true)
+        }><HomeIcon sx={{ fontSize: 14 }}/> return home</button>
+    </div>
+
+  )
+}
+
+function SelectAndDisplay({ range, setRange, setIsHome }) {
   const [dailySpendingMap, setDailySpendingMap] = useState(null)
   const [dates, setDates] = useState([])
   const [day, setDay] = useState()
   const [dailyTransactions, setDailyTransactions] = useState(null)
+  const [isLoading,setIsLoading] = useState(true)
   const { start, end } = range
+
   function getDailyTotal(dailyTransaction) {
     const [date, values] = Array.from(dailyTransaction)
     const total = Object.values(values).reduce((acc, current) => acc += current, 0)
@@ -52,7 +72,11 @@ function SelectAndDisplay({ range, setRange }) {
       .catch(e => {
         console.log(`Error: ${e.message}`)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [])
+
   function handleDaySelection(event) {
     event.preventDefault()
     const arr = event.target.value.split("-").map(i => i.trim())
@@ -64,15 +88,25 @@ function SelectAndDisplay({ range, setRange }) {
     setDailyTransactions(dailySpendingMap.get(date))
   }
 
+  if(isLoading){
+    return <div>Loading...</div>
+  }
+
   if (!dailySpendingMap || dates.length === 0) {
-    return <div>Nothing to display</div>
+    return (
+      <div>
+      <p>Nothing to display</p>
+       <HomeButton setIsHome={setIsHome}/> 
+      </div>
+    )
   }
 
   return (
     <div>
+      <HomeButton setIsHome={setIsHome}/>
       <p>You have selected to see the date range between {start} and {end}:</p>
       <p>Select which day you would like to see:</p>
-      <div>
+       <div>
         <select
           onChange={handleDaySelection}
         >
@@ -93,12 +127,13 @@ function SelectAndDisplay({ range, setRange }) {
   )
 }
 
-function SelectRange({ setRange }) {
+function SelectRange({ setRange, setIsHome }) {
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
   function handleSubmit(event) {
     event.preventDefault()
     setRange({ start: start, end: end })
+    setIsHome(false)
   }
   return (
     <div>
@@ -124,6 +159,7 @@ function SelectRange({ setRange }) {
   )
 }
 function App() {
+  const [isHome,setIsHome] = useState(true)
   const [range, setRange] = useState({
     start: '',
     end: ''
@@ -131,11 +167,15 @@ function App() {
 
   return (
     <>
-      {range.start.length === 0 && range.end.length === 0 ?
-        <SelectRange setRange={setRange} /> :
+      { isHome ?
+        <SelectRange 
+          setRange={setRange}
+          setIsHome={setIsHome}
+        /> :
         <SelectAndDisplay
           range={range}
           setRange={setRange}
+          setIsHome={setIsHome}
         />
       }
     </>
