@@ -15,7 +15,6 @@ function DailyChart({ day, dailyTransactions }) {
     <div>
       <h2>Daily spending for {day}</h2>
       <div>Total spending: ${total}</div>
-      <div>categories: {Object.keys(dailyTransactions).map(i => `${i}, `)}</div>
       <BarChart
         xAxis={[{ data: Object.keys(dailyTransactions) }]}
         series={[{
