@@ -91,5 +91,7 @@ async function getAndTransformTransactions(
 }
 
 export default {
+  getBudgets,
+  getAccounts,
   getAndTransformTransactions,
 };
