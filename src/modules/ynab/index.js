@@ -3,8 +3,6 @@ const ynabAPI = new ynab.API(import.meta.env.VITE_ACCESS_TOKEN);
 import ynabApiFunctions from "./ynabApi.js";
 import { getConfig } from "./config.js";
 
-const YNAB_START_DATE = "2025-12-01";
-
 export function addAmountByCategory(transactions, dateMap) {
   transactions.forEach((t) => {
     const { date, amount, category_name } = t;

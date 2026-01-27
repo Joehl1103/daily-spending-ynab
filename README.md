@@ -22,23 +22,25 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
 ### Prerequisites
 
 - Node.js (v18+)
-- A YNAB account with API access
 - YNAB Personal Access Token ([get one here](https://app.ynab.com/settings/developer))
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd daily-spending-report-app
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Create a `.env` file in the project root with your YNAB credentials:
+
    ```
    VITE_ACCESS_TOKEN=your_ynab_api_token
    VITE_BUDGET_2025_ID=your_budget_uuid
@@ -46,6 +48,7 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
    ```
 
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -60,12 +63,12 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+| Command           | Description                              |
+| ----------------- | ---------------------------------------- |
+| `npm run dev`     | Start development server with hot reload |
+| `npm run build`   | Build for production                     |
+| `npm run preview` | Preview production build                 |
+| `npm run lint`    | Run ESLint                               |
 
 ## Project Structure
 
@@ -83,6 +86,7 @@ src/
 ## Testing
 
 Run unit tests with:
+
 ```bash
 node --test src/modules/ynab/index.test.js
 ```

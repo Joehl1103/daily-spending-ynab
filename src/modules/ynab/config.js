@@ -1,7 +1,7 @@
 const configs = {
   personal: {
-    budgetId: import.meta.env.VITE_BUDGET_2025_ID,
-    accountId: import.meta.env.VITE_BUDGET_2025_CHECKING_ID,
+    budgetId: import.meta.env.VITE_MAIN_BUDGET_ID,
+    accountId: import.meta.env.VITE_MAIN_CHECKING_ID,
   },
   test: {
     budgetId: import.meta.env.VITE_TEST_BUDGET_ID,

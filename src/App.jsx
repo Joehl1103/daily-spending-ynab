@@ -153,8 +153,7 @@ function SelectRange({ setRange, setIsHome }) {
     <div>
       <p>
         Welcome to my utility application to see how you much you have been
-        spending on daily basiWelcome to my utility application to see how you
-        much you have been spending on daily basis.
+        spending on daily basis.
       </p>
       <p>Select the start and end date of the range:</p>
       <form onSubmit={handleSubmit}>
