@@ -181,7 +181,18 @@ function App() {
   });
 
   return (
-    <>
+    <div>
+      {import.meta.env.MODE === "test" ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          ⚠️ TEST MODE ⚠️
+        </div>
+      ) : null}
       <h1>Daily Spending Report</h1>
 
       {isHome ? (
@@ -193,7 +204,7 @@ function App() {
           setIsHome={setIsHome}
         />
       )}
-    </>
+    </div>
   );
 }
 

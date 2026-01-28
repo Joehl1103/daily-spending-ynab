@@ -22,6 +22,7 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
 ### Prerequisites
 
 - Node.js (v18+)
+- A YNAB account with API access
 - YNAB Personal Access Token ([get one here](https://app.ynab.com/settings/developer))
 
 ### Installation
@@ -39,18 +40,33 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
    npm install
    ```
 
-3. Create a `.env` file in the project root with your YNAB credentials:
+3. Create environment files in the project root:
 
+   **`.env`** (shared configuration):
    ```
    VITE_ACCESS_TOKEN=your_ynab_api_token
-   VITE_BUDGET_2025_ID=your_budget_uuid
-   VITE_CHECKING_ID=your_account_uuid
+   ```
+
+   **`.env.test`** (test mode):
+   ```
+   VITE_MODE=test
+   VITE_TEST_BUDGET_ID=your_test_budget_uuid
+   VITE_TEST_BUDGET_CHECKING_ID=your_test_account_uuid
+   ```
+
+   **`.env.personal`** (personal/production mode):
+   ```
+   VITE_MODE=personal
+   VITE_MAIN_BUDGET_ID=your_personal_budget_uuid
+   VITE_MAIN_CHECKING_ID=your_personal_account_uuid
    ```
 
 4. Start the development server:
 
    ```bash
-   npm run dev
+   npm run dev              # Runs in default mode (test)
+   npm run dev:test        # Explicitly runs in test mode
+   npm run dev:prod        # Runs in personal/production mode
    ```
 
 5. Open your browser to `http://localhost:5173`
@@ -63,12 +79,14 @@ A React web application that integrates with YNAB (You Need A Budget) to visuali
 
 ## Available Scripts
 
-| Command           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `npm run dev`     | Start development server with hot reload |
-| `npm run build`   | Build for production                     |
-| `npm run preview` | Preview production build                 |
-| `npm run lint`    | Run ESLint                               |
+| Command            | Description                              |
+| ------------------ | ---------------------------------------- |
+| `npm run dev`      | Start development server (test mode)     |
+| `npm run dev:test` | Start development server in test mode    |
+| `npm run dev:prod` | Start development server in personal mode |
+| `npm run build`    | Build for production                     |
+| `npm run preview`  | Preview production build                 |
+| `npm run lint`     | Run ESLint                               |
 
 ## Project Structure
 
