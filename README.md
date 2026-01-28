@@ -2,6 +2,10 @@
 
 A React web application that integrates with YNAB (You Need A Budget) to visualize daily spending patterns by category.
 
+## Genesis & Prologue
+
+This application grew out of a frustration to manage our daily spending, despite the wonderful world of [YNAB](https://www.ynab.com). How can we be spending this much every day while I have my eagle eyes on the account at least every week?! My manager daemon whispered in my ear "what isn't measured isn't managed...". I realized that while I love YNAB, it doesn't give you a built-in break-down of your daily spending, so I decided to build something to help.
+
 ## Demo
 
 https://github.com/user-attachments/assets/a0fab467-8bdf-4ac3-b73e-fe9024cb3f65
@@ -47,17 +51,20 @@ https://github.com/user-attachments/assets/a0fab467-8bdf-4ac3-b73e-fe9024cb3f65
 3. Create environment files in the project root:
 
    **`.env`** (shared configuration loaded by all modes):
+
    ```
    VITE_ACCESS_TOKEN=your_ynab_api_token
    ```
 
    **`.env.test`** (test mode - loaded when running `npm run test`):
+
    ```
    VITE_MAIN_BUDGET_ID=your_test_budget_uuid
    VITE_MAIN_CHECKING_ID=your_test_account_uuid
    ```
 
    **`.env.personal`** (personal mode - loaded when running `npm run personal`):
+
    ```
    VITE_MAIN_BUDGET_ID=your_personal_budget_uuid
    VITE_MAIN_CHECKING_ID=your_personal_account_uuid
@@ -82,13 +89,13 @@ https://github.com/user-attachments/assets/a0fab467-8bdf-4ac3-b73e-fe9024cb3f65
 
 ## Available Scripts
 
-| Command            | Description                              |
-| ------------------ | ---------------------------------------- |
-| `npm run test`     | Start development server in test mode    |
+| Command            | Description                               |
+| ------------------ | ----------------------------------------- |
+| `npm run test`     | Start development server in test mode     |
 | `npm run personal` | Start development server in personal mode |
-| `npm run build`    | Build for production                     |
-| `npm run preview`  | Preview production build                 |
-| `npm run lint`     | Run ESLint                               |
+| `npm run build`    | Build for production                      |
+| `npm run preview`  | Preview production build                  |
+| `npm run lint`     | Run ESLint                                |
 
 ## Project Structure
 
