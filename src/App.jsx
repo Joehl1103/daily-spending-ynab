@@ -48,7 +48,7 @@ function HomeButton({ setIsHome }) {
   );
 }
 
-function SelectAndDisplay({ range, setRange, setIsHome }) {
+function SelectAndDisplay({ range, setIsHome }) {
   const [dailySpendingMap, setDailySpendingMap] = useState(null);
   const [dates, setDates] = useState([]);
   const [day, setDay] = useState(null);
@@ -75,7 +75,7 @@ function SelectAndDisplay({ range, setRange, setIsHome }) {
         setDates(datesWithTotals);
       })
       .catch((e) => {
-        cansole.log(`Error: ${e.message}`);
+        console.warn(`Error: ${e.message}`);
       })
       .finally(() => {
         setIsLoading(false);
@@ -198,11 +198,7 @@ function App() {
       {isHome ? (
         <SelectRange setRange={setRange} setIsHome={setIsHome} />
       ) : (
-        <SelectAndDisplay
-          range={range}
-          setRange={setRange}
-          setIsHome={setIsHome}
-        />
+        <SelectAndDisplay range={range} setIsHome={setIsHome} />
       )}
     </div>
   );

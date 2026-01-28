@@ -24,9 +24,7 @@ function checkForDueDatesAndRemove(category) {
 }
 
 function cleanCategory(category) {
-  console.log(/\-/i.test(category) ? `category: ${category}` : null);
   const sansEmoji = category.replaceAll(/\p{Emoji}/gu, "");
-  console.log(/\-/i.test(sansEmoji) ? `sansEmoji ${sansEmoji}` : null);
   return checkForDueDatesAndRemove(sansEmoji);
 }
 
