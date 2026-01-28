@@ -2,6 +2,10 @@
 
 A React web application that integrates with YNAB (You Need A Budget) to visualize daily spending patterns by category.
 
+## Demo
+
+https://github.com/user-attachments/assets/a0fab467-8bdf-4ac3-b73e-fe9024cb3f65
+
 ## Features
 
 - Connect to your YNAB account via API
