@@ -3,8 +3,18 @@
 A React web application that integrates with YNAB (You Need A Budget) to visualize daily spending patterns by category.
 
 ## Genesis & Prologue
+**Why:**  
+This application grew out of a frustration to manage our daily spending, despite the wonderful world of [YNAB](https://www.ynab.com). How can we be spending this much every day while I have my eagle eyes on the account at least every week?! My manager daemon whispered in my ear "what isn't measured isn't managed...". I realized that while I love YNAB, it doesn't give you a built-in break-down of your daily spending, so I decided to build something to help.  
 
-This application grew out of a frustration to manage our daily spending, despite the wonderful world of [YNAB](https://www.ynab.com). How can we be spending this much every day while I have my eagle eyes on the account at least every week?! My manager daemon whispered in my ear "what isn't measured isn't managed...". I realized that while I love YNAB, it doesn't give you a built-in break-down of your daily spending, so I decided to build something to help.
+**Technical Approach:**  
+I stuck with React and Vite because that's what I'd been using in Full Stack Open - I wanted to focus on solving the data problem rather than learning a new framework. I chose Material-UI specifically for their chart components. Since I do a lot of reporting in my operations role, I wanted to challenge myself to integrate data visualization into a real project.  
+
+**What I learned:**  
+* The power of regex for text processing
+* How to integrate chart libraries into React applications  
+
+**What I would do differently:**  
+Start with UI first and work backwards to data parsing, rather than processing data without knowing how charts would consume it.
 
 ## Demo
 
