@@ -123,6 +123,8 @@ src/
 
 ## Testing
 
+Testing focuses on the YNAB data-processing module using Node's built-in test runner. The current suite validates the core aggregation logic for grouping transactions by date and category, keeping coverage centered on the calculations that drive the reporting UI.
+
 Run unit tests with:
 
 ```bash
