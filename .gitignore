@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .env
 PORTFOLIO_IMPROVEMENTS.md
+story.md
+.env.personal
+.env.prod
+.env.test
