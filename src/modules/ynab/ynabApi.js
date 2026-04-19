@@ -5,7 +5,7 @@ async function getBudgets(api) {
     const budgetsResponse = await api.budgets.getBudgets();
     return budgetsResponse.data.budgets;
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 }
 
@@ -15,7 +15,7 @@ async function getAccounts(api, budgetId) {
 
     return transactionResponse.data.accounts;
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 }
 
@@ -55,7 +55,7 @@ async function getTransactionsByAccount(api, budgetId, accountId) {
 
     return transactionResponse.data.transactions;
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 }
 
@@ -83,7 +83,7 @@ async function getAndTransformTransactions(
     );
     return simplifyTransactions(filteredTransactions);
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 }
 

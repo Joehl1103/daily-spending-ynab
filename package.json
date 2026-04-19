@@ -6,6 +6,7 @@
   "scripts": {
     "personal": "vite --mode personal",
     "test": "vite --mode test",
+    "unit-test": "node --test src/modules/ynab/index.test.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

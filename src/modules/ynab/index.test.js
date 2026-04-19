@@ -3,9 +3,9 @@ import assert from "node:assert";
 import { addAmountByCategory } from "./index.js";
 
 const dateMap = new Map([
-  ["2026-01-15", new Map()],
-  ["2026-01-16", new Map()],
-  ["2026-01-17", new Map()],
+  ["2026-01-15", {}],
+  ["2026-01-16", {}],
+  ["2026-01-17", {}],
 ]);
 
 const transactions = [
