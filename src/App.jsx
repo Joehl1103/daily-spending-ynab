@@ -4,6 +4,9 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import HomeIcon from "@mui/icons-material/Home";
 
 function DailyChart({ day, dailyTransactions }) {
+  const sortedEntries = Object.entries(dailyTransactions).sort(
+    ([, a], [, b]) => b - a,
+  );
   const total = Object.values(dailyTransactions)
     .reduce((acc, current) => {
       return (acc += current);
@@ -14,12 +17,10 @@ function DailyChart({ day, dailyTransactions }) {
       <h2>Daily spending for {day}</h2>
       <div>Total spending: ${total}</div>
       <BarChart
-        xAxis={[{ data: Object.keys(dailyTransactions) }]}
+        xAxis={[{ data: sortedEntries.map(([k]) => k) }]}
         series={[
           {
-            data: Object.values(dailyTransactions)
-              .sort((a, b) => new Date(b) - new Date(a))
-              .map((i) => i.toFixed(2)),
+            data: sortedEntries.map(([, v]) => parseFloat(v.toFixed(2))),
             barLabel: "value",
           },
         ]}

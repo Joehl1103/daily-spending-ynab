@@ -16,7 +16,6 @@ function getYnabAPI() {
 }
 
 export function addAmountByCategory(transactions, dateMap) {
-  console.log("transactions", transactions);
   transactions
     .filter((t) => t.amount < 0)
     .forEach((t) => {
